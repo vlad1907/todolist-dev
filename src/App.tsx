@@ -30,6 +30,14 @@ function App() {
         setFilter(value);
     }
 
+    function changeStatus(taskId: string, isDone: boolean) {
+        let task = tasks.find(t => t.id === taskId);
+        if (task) {
+            task.isDone = isDone;
+        }
+       setTasks([ ...tasks ]);
+    }
+
     let tasksForTodolist = tasks;
     if (filter === "completed") {
         tasksForTodolist = tasks.filter(t => t.isDone === true);
@@ -41,7 +49,7 @@ function App() {
     return (
         <div className="App">
             <Todolist title="What to learn" tasks={tasksForTodolist} removeTask={removeTask}
-                      changeFilter={changeFilter} addTask={addTask}/>
+                      changeFilter={changeFilter} addTask={addTask} changeTaskStatus={changeStatus}/>
         </div>
     );
 }
