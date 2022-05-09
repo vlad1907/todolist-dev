@@ -13,11 +13,10 @@ type TodolistType = {
 }
 
 type TasksStateType = {
-    [key:string]:Array<TaskType>
+    [key: string]: Array<TaskType>
 }
 
 function App() {
-
 
 
     function removeTask(id: string, todolistId: string) {
@@ -52,6 +51,15 @@ function App() {
         }
     }
 
+    function changeTaskTitle(taskId: string, newTitle: string, todolistId: string) {
+        let tasks = tasksObj[todolistId]
+        let task = tasks.find(t => t.id === taskId);
+        if (task) {
+            task.title = newTitle;
+            setTasks({...tasksObj});
+        }
+    }
+
     let todolistId1 = v1();
     let todolistId2 = v1();
 
@@ -65,6 +73,14 @@ function App() {
         setTodolists(filteredTodolist)
         delete tasksObj[todolistId];
         setTasks({...tasksObj})
+    }
+
+    function changeTodolistTitle(todolistId: string, newTitle: string) {
+       const todolist = todolists.find(tl=>tl.id === todolistId)
+        if (todolist) {
+            todolist.title = newTitle
+            setTodolists([...todolists])
+        }
     }
 
     let [tasksObj, setTasks] = useState<TasksStateType>({
@@ -81,19 +97,19 @@ function App() {
         ],
     })
 
-    function addTodolist(title:string) {
+    function addTodolist(title: string) {
         let todolist: TodolistType = {
             id: v1(),
             filter: 'all',
             title: title
         }
         setTodolists([todolist, ...todolists]);
-        setTasks({...tasksObj,[todolist.id]:[]})
+        setTasks({...tasksObj, [todolist.id]: []})
     }
 
     return (
         <div className="App">
-            <AddItemForm addItem={addTodolist} />
+            <AddItemForm addItem={addTodolist}/>
             {
                 todolists.map((tl) => {
 
@@ -114,10 +130,12 @@ function App() {
                                      changeFilter={changeFilter}
                                      addTask={addTask}
                                      changeTaskStatus={changeStatus}
+                                     changeTaskTitle={changeTaskTitle}
+                                     changeTodolistTitle={changeTodolistTitle}
                                      filter={tl.filter}/>
                 })
             }
-            
+
         </div>
     );
 }
