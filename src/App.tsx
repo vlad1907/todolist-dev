@@ -3,7 +3,18 @@ import './App.css';
 import {TaskType, Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from './AddItemForm';
-import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@material-ui/core';
+import {
+    AppBar,
+    Button,
+    Container, createStyles,
+    Grid,
+    IconButton,
+    makeStyles,
+    Paper,
+    Theme,
+    Toolbar,
+    Typography
+} from '@material-ui/core';
 import {Menu} from '@material-ui/icons';
 
 export type FilterValuesType = "all" | "completed" | "active";
@@ -18,8 +29,22 @@ type TasksStateType = {
     [key: string]: Array<TaskType>
 }
 
-function App() {
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            flexGrow: 1,
+        },
+        menuButton: {
+            marginRight: theme.spacing(2),
+        },
+        title: {
+            flexGrow: 1,
+        },
+    }),
+);
 
+function App() {
+    const classes = useStyles();
 
     function removeTask(id: string, todolistId: string) {
         let tasks = tasksObj[todolistId]
@@ -113,20 +138,20 @@ function App() {
         <div className="App">
             <AppBar position="static">
                 <Toolbar>
-                    <IconButton edge="start" color="inherit" aria-label="menu">
+                    <IconButton edge="start" color="inherit" aria-label="menu" className={classes.menuButton}>
                         <Menu/>
                     </IconButton>
-                    <Typography variant="h6">
-                        News
+                    <Typography variant="h6" className={classes.title}>
+                        Todolists
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
             <Container fixed>
-                <Grid container style={{padding: "20px"}}>
+                <Grid container style={{padding: "20px"}} justifyContent={"center"}>
                     <AddItemForm addItem={addTodolist}/>
                 </Grid>
-                <Grid container spacing={3}>
+                <Grid container spacing={3} justifyContent={"center"}>
                     {
                         todolists.map((tl) => {
 
