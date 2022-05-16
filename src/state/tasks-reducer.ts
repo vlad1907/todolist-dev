@@ -1,7 +1,6 @@
 import {TasksStateType} from '../App';
 import {v1} from 'uuid';
-import {common} from '@material-ui/core/colors';
-import {AddTodolistActionType, RemoveTodolistActionType} from './todolists-reducer';
+import {AddTodolistActionType, RemoveTodolistActionType, todolistId1, todolistId2} from './todolists-reducer';
 
 type RemoveTaskActionType = {
     type: 'REMOVE-TASK'
@@ -29,8 +28,21 @@ type ChangeTaskTitleActionType = {
 type ActionsType = RemoveTaskActionType | AddTaskActionType | ChangeTaskStatusActionType |
     ChangeTaskTitleActionType | AddTodolistActionType | RemoveTodolistActionType
 
+const initialState: TasksStateType = {
+ /*   [todolistId1]: [
+        {id: v1(), title: "CSS", isDone: true},
+        {id: v1(), title: "JS", isDone: true},
+        {id: v1(), title: "React", isDone: false},
+        {id: v1(), title: "Redux", isDone: false}
+    ],
+    [todolistId2]: [
+        {id: v1(), title: "Book", isDone: true},
+        {id: v1(), title: "Milk", isDone: true},
 
-export const tasksReducer = (state: TasksStateType, action: ActionsType): TasksStateType => {
+    ]*/
+}
+
+export const tasksReducer = (state = initialState, action: ActionsType): TasksStateType => {
     switch (action.type) {
         case 'REMOVE-TASK': {
             const stateCopy = {...state};
@@ -70,13 +82,13 @@ export const tasksReducer = (state: TasksStateType, action: ActionsType): TasksS
             stateCopy[action.todolistId] = [];
             return stateCopy;
         }
-        case 'REMOVE-TODOLIST':{
+        case 'REMOVE-TODOLIST': {
             const stateCopy = {...state};
             delete stateCopy[action.id]
             return stateCopy;
         }
         default:
-            throw new Error("I don't understand this type")
+            return state;
 
     }
 }
