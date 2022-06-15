@@ -29,7 +29,7 @@ type ActionsType = RemoveTaskActionType | AddTaskActionType | ChangeTaskStatusAc
     ChangeTaskTitleActionType | AddTodolistActionType | RemoveTodolistActionType
 
 const initialState: TasksStateType = {
- /*   [todolistId1]: [
+   /* [todolistId1]: [
         {id: v1(), title: "CSS", isDone: true},
         {id: v1(), title: "JS", isDone: true},
         {id: v1(), title: "React", isDone: false},

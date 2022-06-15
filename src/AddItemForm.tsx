@@ -7,7 +7,7 @@ type AddItemFormPropsType = {
 }
 
 export function AddItemForm(props: AddItemFormPropsType) {
-
+    console.log("Additem is called")
     const [newTaskTitle, setNewTaskTitle] = useState("");
 
     let [error, setError] = useState<string | null>(null)
@@ -17,7 +17,9 @@ export function AddItemForm(props: AddItemFormPropsType) {
     }
 
     const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        setError(null)
+        if (error !== null) {
+            setError(null)
+        }
         if (e.charCode === 13) {
             // props.addTask(newTaskTitle);
             addTask()

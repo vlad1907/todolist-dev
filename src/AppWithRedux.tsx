@@ -127,7 +127,7 @@ function AppWithRedux() {
                                 tasksForTodolist = tasksForTodolist.filter(t => t.isDone === false);
                             }
 
-                            return <Grid item>
+                            return <Grid item key={tl.id}>
                                 <Paper style={{padding: "10px"}}>
                                     <Todolist id={tl.id}
                                               removeTodolist={removeTodolist}
