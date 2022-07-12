@@ -6,7 +6,7 @@ type AddItemFormPropsType = {
     addItem: (title: string) => void
 }
 
-export function AddItemForm(props: AddItemFormPropsType) {
+export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
     console.log("Additem is called")
     const [newTaskTitle, setNewTaskTitle] = useState("");
 
@@ -47,8 +47,8 @@ export function AddItemForm(props: AddItemFormPropsType) {
             error={!!error}
             helperText={error}
         />
-        <IconButton onClick={addTask}  color={'primary'}>
+        <IconButton onClick={addTask} color={'primary'}>
             <ControlPoint/>
         </IconButton>
     </div>
-}
+})
