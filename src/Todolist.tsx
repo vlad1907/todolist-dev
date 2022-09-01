@@ -1,4 +1,4 @@
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import {AddItemForm} from './AddItemForm';
 import {EditableSpan} from "./EditableSpan";
 import {Button, IconButton} from '@material-ui/core';
@@ -6,6 +6,8 @@ import {Delete} from '@material-ui/icons';
 import {Task} from './Task';
 import {TaskStatuses, TaskType} from "./api/todolists-api";
 import {FilterValuesType} from "./state/todolists-reducer";
+import {useAppDispatch} from './state/hooks';
+import {fetchTasksTC} from './state/tasks-reducer';
 
 
 type PropsType = {
@@ -24,6 +26,13 @@ type PropsType = {
 
 export const Todolist = React.memo(function (props: PropsType) {
     console.log('Todolist called')
+
+    const dispatch = useAppDispatch()
+
+    useEffect(()=>{
+        dispatch(fetchTasksTC(props.id))
+    }, [])
+
     const onAllClickHandler = useCallback(() => props.changeFilter("all", props.id), [props.changeFilter, props.id])
     const onActiveClickHandler = useCallback(() => props.changeFilter("active", props.id), [props.changeFilter, props.id])
     const onCompletedClickHandler = useCallback(() => props.changeFilter("completed", props.id), [props.changeFilter, props.id])
