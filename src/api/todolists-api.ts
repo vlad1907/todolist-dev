@@ -55,7 +55,6 @@ export type TaskType = {
 export type UpdateTaskType = {
     title: string
     description: string
-    completed: boolean
     status: TaskStatuses
     priority: TaskPriorities
     startDate: string

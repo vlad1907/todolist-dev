@@ -13,7 +13,7 @@ let todolistId1: string
 let todolistId2: string
 let startState: Array<TodolistDomainType> = []
 
-beforeEach(()=>{
+beforeEach(() => {
     todolistId1 = v1()
     todolistId2 = v1()
     startState = [
@@ -30,12 +30,18 @@ test('correct todolist should be removed', () => {
 });
 
 test('correct todolist should be added', () => {
-    let newTodolistTitle = "New Todolist";
+    let todolist: TodolistDomainType = {
+        title: "New Todolist",
+        addedDate: '',
+        order: 0,
+        id: 'any id',
+        filter: 'all'
+    };
 
-    const endState = todolistsReducer(startState, addTodolistAC(newTodolistTitle))
+    const endState = todolistsReducer(startState, addTodolistAC(todolist))
 
     expect(endState.length).toBe(3);
-    expect(endState[0].title).toBe(newTodolistTitle);
+    expect(endState[0].title).toBe(todolist.title);
     expect(endState[2].filter).toBe("all");
 });
 
