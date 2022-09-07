@@ -21,7 +21,6 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
             setError(null)
         }
         if (e.charCode === 13) {
-            // props.addTask(newTaskTitle);
             addTask()
             setNewTaskTitle("");
         }
