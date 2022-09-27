@@ -6,6 +6,7 @@ import {
     Container,
     createStyles,
     IconButton,
+    LinearProgress,
     makeStyles,
     Theme,
     Toolbar,
@@ -13,6 +14,8 @@ import {
 } from '@material-ui/core';
 import {Menu} from '@material-ui/icons';
 import {TodolistsList} from '../features/TodolistsList/TodolistsList';
+import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar';
+import {useAppSelector} from './hooks';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,12 +32,16 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
+type PropsType = {
+    demo?: boolean
+}
 
-function App() {
+function App({demo = false}:PropsType) {
     const classes = useStyles();
-
+    const status = useAppSelector(state => state.app.status)
     return (
         <div className="App">
+            <ErrorSnackbar/>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" color="inherit" aria-label="menu" className={classes.menuButton}>
@@ -45,9 +52,10 @@ function App() {
                     </Typography>
                     <Button color="inherit">Login</Button>
                 </Toolbar>
+                {status === 'loading' && <LinearProgress/>}
             </AppBar>
             <Container fixed>
-                <TodolistsList/>
+                <TodolistsList demo={demo}/>
             </Container>
         </div>
     );

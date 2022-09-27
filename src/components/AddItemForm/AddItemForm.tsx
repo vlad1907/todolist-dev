@@ -4,9 +4,10 @@ import {ControlPoint} from '@material-ui/icons';
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
+    disabled?: boolean
 }
 
-export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
+export const AddItemForm = React.memo(({addItem, disabled = false}: AddItemFormPropsType) => {
     console.log("Additem is called")
     const [newTaskTitle, setNewTaskTitle] = useState("");
 
@@ -31,13 +32,14 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
             setError("Title is required")
             return;
         }
-        props.addItem(newTaskTitle.trim());
+        addItem(newTaskTitle.trim());
         setNewTaskTitle("");
     }
 
 
     return <div>
         <TextField
+            disabled={disabled}
             label={'Type value'}
             variant={'outlined'}
             value={newTaskTitle}
@@ -46,7 +48,7 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
             error={!!error}
             helperText={error}
         />
-        <IconButton onClick={addTask} color={'primary'}>
+        <IconButton onClick={addTask} color={'primary'}disabled={disabled}>
             <ControlPoint/>
         </IconButton>
     </div>
