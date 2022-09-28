@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, {AxiosResponse} from 'axios'
 
 const settings = {
     withCredentials: true,
@@ -32,7 +32,7 @@ export const todolistAPI = {
         return instance.post<ResponseType<{ item: TaskType }>>(`todo-lists/${todolistID}/tasks`, {title})
     },
     updateTask(todolistId: string, taskId: string, model: UpdateTaskType) {
-        return instance.put<UpdateTaskType, ResponseType<{ item: TaskType }>>(`/todo-lists/${todolistId}/tasks/${taskId}`, model)
+        return instance.put<UpdateTaskType, AxiosResponse<ResponseType<{ item: TaskType }>>>(`/todo-lists/${todolistId}/tasks/${taskId}`, model)
     },
     deleteTask(todolistID: string, taskId: string) {
         return instance.delete<ResponseType>(`todo-lists/${todolistID}/tasks/${taskId}`)
@@ -46,7 +46,7 @@ export type TodolistType = {
     addedDate: string
     order: number
 }
-type ResponseType<D = {}> = {
+export type ResponseType<D = {}> = {
     resultCode: number
     messages: string[]
     data: D
