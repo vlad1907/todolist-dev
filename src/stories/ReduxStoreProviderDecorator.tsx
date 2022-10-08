@@ -13,7 +13,7 @@ import thunk from 'redux-thunk';
 const rootReducer = combineReducers({
     tasks: tasksReducer,
     todolists: todolistsReducer,
-    app: appReducer
+    app: appReducer,
 })
 
 const initialGlobalState: AppRootStateType = {
@@ -69,7 +69,11 @@ const initialGlobalState: AppRootStateType = {
     },
     app: {
         error: null,
-        status: 'idle'
+        status: 'idle',
+        isInitialized: false
+    },
+    auth: {
+        isLoggedIn: false
     }
 }
 
