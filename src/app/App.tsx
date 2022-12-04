@@ -16,7 +16,7 @@ import {Menu} from '@material-ui/icons';
 import {TodolistsList} from '../features/TodolistsList/TodolistsList';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar';
 import {useAppDispatch, useAppSelector} from './hooks';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Route, Routes} from 'react-router-dom';
 import {Login} from '../features/Login/Login';
 import {initializedAppTC} from './app-reducer';
 import {logoutTC} from '../features/Login/auth-reducer';
@@ -62,7 +62,7 @@ function App({demo = false}: PropsType) {
     }
 
     return (
-        <BrowserRouter>
+        <HashRouter>
             <div className="App">
                 <ErrorSnackbar/>
                 <AppBar position="static">
@@ -85,7 +85,7 @@ function App({demo = false}: PropsType) {
                     </Routes>
                 </Container>
             </div>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 

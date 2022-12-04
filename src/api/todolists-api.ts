@@ -3,7 +3,7 @@ import axios, {AxiosResponse} from 'axios'
 const settings = {
     withCredentials: true,
     headers: {
-        'API-KEY': 'b6ec5262-3a7f-4613-ab32-e5f165a7a372',
+        'API-KEY': 'f6e09271-9951-4ca7-8fbf-c73bc4098a4f',
     },
 }
 const instance = axios.create({
@@ -48,7 +48,7 @@ export type LoginParamsType = {
 
 export const authAPI = {
     login(data: LoginParamsType) {
-        return instance.post<ResponseType<{ userId?: number }>>('auth/login', {data})
+        return instance.post<ResponseType<{ userId?: number }>>('auth/login', data)
     },
     logout() {
         return instance.delete<ResponseType<{ userId?: number }>>('auth/login')
