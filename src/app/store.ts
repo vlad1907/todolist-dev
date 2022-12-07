@@ -13,8 +13,8 @@ const rootReducer = combineReducers({
     app: appReducer,
     auth: authReducer
 })
-
-export type AppRootStateType = ReturnType<typeof rootReducer>
+export type RootReducerType = typeof rootReducer
+export type AppRootStateType = ReturnType<RootReducerType>
 export type AppDispatch = ThunkDispatch<AppRootStateType,
     unknown,
     AnyAction>
