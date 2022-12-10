@@ -2,7 +2,8 @@ import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {
     AppBar,
-    Button, CircularProgress,
+    Button,
+    CircularProgress,
     Container,
     createStyles,
     IconButton,
@@ -16,7 +17,7 @@ import {Menu} from '@material-ui/icons';
 import {TodolistsList} from '../features/TodolistsList/TodolistsList';
 import {ErrorSnackbar} from '../components/ErrorSnackbar/ErrorSnackbar';
 import {useAppDispatch, useAppSelector} from './hooks';
-import {BrowserRouter, HashRouter, Route, Routes} from 'react-router-dom';
+import {HashRouter, Route, Routes} from 'react-router-dom';
 import {Login} from '../features/Login/Login';
 import {initializedAppTC} from './app-reducer';
 import {logoutTC} from '../features/Login/auth-reducer';
